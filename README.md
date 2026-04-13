@@ -10,7 +10,7 @@ This plugin requires Craft CMS 3.3.0 or later, and Imager X 3.0 or later. Extern
 
 To install the plugin, follow these instructions:
 
-1. Install with composer via `composer require paragonn/craft-imager-x-azure-blob` from your project directory.
+1. Install with composer via `composer require motumb2b/craft-imager-x-azure-blob` from your project directory.
 2. Install the plugin in the Craft Control Panel under Settings > Plugins, or from the command line via `./craft install/plugin craft-imager-x-azure-blob`.
 
 ## Configuration

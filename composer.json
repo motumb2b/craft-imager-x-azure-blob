@@ -18,7 +18,7 @@
 		"docs": "https://github.com/paragonn/craft-imager-x-azure-blob/blob/main/README.md"
 	},
 	"require": {
-		"craftcms/cms": "^3.3.0",
+		"craftcms/cms": "^5.0.0",
 		"league/flysystem-azure-blob-storage": "^1.0.0"
 	},
 	"autoload": {

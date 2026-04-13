@@ -15,6 +15,7 @@ use spacecatninja\imagerx\services\ImagerService;
 use spacecatninja\imagerx\externalstorage\ImagerStorageInterface;
 use League\Flysystem\AzureBlobStorage\AzureBlobStorageAdapter;
 use League\Flysystem\Filesystem;
+use League\Flysystem\UnableToWriteFile;
 use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 
 use yii\web\Controller;
@@ -53,10 +54,21 @@ class AzureStorage implements ImagerStorageInterface
 
         $adapter = new AzureBlobStorageAdapter($client, Craft::parseEnv($settings['container']));
         $filesystem = new Filesystem($adapter);
-        $stream = fopen($file, 'r+');
-        $filesystem->putStream($uri, $stream);
-        // $filesystem->updateStream($uri, $stream);
-        // fclose($stream);
+        $stream = fopen($file, 'rb');
+
+        if ($stream === false) {
+            Craft::error('Unable to open local file for upload: ' . $file, __METHOD__);
+            return false;
+        }
+
+        try {
+            $filesystem->writeStream($uri, $stream);
+        } catch (UnableToWriteFile $e) {
+            Craft::error('Unable to upload file to Azure Blob Storage: ' . $e->getMessage(), __METHOD__);
+            return false;
+        } finally {
+            fclose($stream);
+        }
 
         /*$opts = $settings['requestHeaders'];
         $cacheDuration = $isFinal ? $config->cacheDurationExternalStorage : $config->cacheDurationNonOptimized;

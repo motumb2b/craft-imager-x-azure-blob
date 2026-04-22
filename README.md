@@ -4,14 +4,23 @@ This is an external storage driver for Imager X that uploads your Imager transfo
 
 ## Requirements
 
-This plugin requires Craft CMS 3.3.0 or later, and Imager X 3.0 or later. External storages are only available in the Pro edition of Imager.
+This plugin requires Craft CMS 5.0.0 or later, and Imager X 3.0 or later. External storages are only available in the Pro edition of Imager.
 
 ## Installation
 
 To install the plugin, follow these instructions:
 
-1. Install with composer via `composer require motumb2b/craft-imager-x-azure-blob` from your project directory.
-2. Install the plugin in the Craft Control Panel under Settings > Plugins, or from the command line via `./craft install/plugin craft-imager-x-azure-blob`.
+1. Add `"paragonn/craft-imager-x-azure-blob": "dev-craft5"` to the requried packages in your `composer.json`
+2. Add the following to the `repositories` array in your `composer.json`:
+```
+{
+    "type": "vcs",
+    "url": "https://github.com/motumb2b/craft-imager-x-azure-blob",
+    "no-api": true
+}
+```
+3. Run `composer update`
+4. Install the plugin in the Craft Control Panel under Settings > Plugins
 
 ## Configuration
 
